@@ -5,6 +5,7 @@ import Data from '../components/Data'
 // imagem em assets
 import noite from "./assets/night.jpg"
 import Listrender from '../components/Listrender'
+import ShowUserNames from '../components/ShowUserNames'
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       <Data/>
       <div>
         <Listrender/>
+      </div>
+      <div>
+        <ShowUserNames name="Rogério"/>
       </div>
    </div>
   )
