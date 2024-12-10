@@ -9,7 +9,7 @@
 
 * para abrir : code . 
 
-( npm install
+* npm install
 
 * para rodar use o :   npm rum dev
 
