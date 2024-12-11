@@ -10,7 +10,16 @@ import ShowUserNames from '../components/ShowUserNames'
 // Desestruturando props
 import CardDetails from '../components/CardDetails'
 
+import Flagments from '../components/Flagments'
 
+
+import Container from '../components/Container'
+
+import ExecuteFunction from '../components/ExecuteFunction'
+import { useState } from 'react'
+
+import Message from '../components/Message'
+import ChangeMessage from '../components/ChangeMessage'
 // Usando renderização e listas, aproveitamento de componente
 const cars = [
   { id: 1, brand: "Ferrari", color: "Amarelo", km: 0 },
@@ -18,7 +27,23 @@ const cars = [
   { id: 3, brand: "Renault", color: "Azul", km: 32000 },
 ];
 
+function botao(){
+
+  console.log("cliquei no botão")
+
+}
+
+
+
 function App() {
+
+  const [message,setMenssage]=useState("")
+
+  function handleMessage(msg){
+  setMenssage(msg)
+}
+
+
   return (
    <div className='App'>
       <h1>Avançando em React</h1>
@@ -47,8 +72,25 @@ function App() {
         ))}
     </ul> 
 
+    <Flagments/>
 
+    <Container>
+      <h1>Dentro do Container</h1>
+    <ul>
+      <li>elemento 1</li>
+      <li>elemento 2</li>
+      <li>elemento 3</li>
+    </ul>
+    </Container>
+
+    <ExecuteFunction myFunction={botao} />
+
+
+<Message msg={message}/>
+<ChangeMessage myFunction={handleMessage}/>
    </div>
+
+   
   )
 }
 export default App
