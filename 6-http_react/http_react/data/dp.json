@@ -1,3 +1,49 @@
 {
-    "products":[]
+  "products": [
+    {
+      "name": "carro",
+      "price": "55.55",
+      "id": 6
+    },
+    {
+      "name": "macarrão",
+      "price": "7.56",
+      "id": 7
+    },
+    {
+      "name": "pão",
+      "price": "10.20",
+      "id": 8
+    },
+    {
+      "id": "cf3c",
+      "name": "teste",
+      "price": "23"
+    },
+    {
+      "id": "09c6",
+      "name": "óleo",
+      "price": "7.45"
+    },
+    {
+      "id": "c60c",
+      "name": "açucar",
+      "price": "4.45"
+    },
+    {
+      "id": "bc45",
+      "name": "sal",
+      "price": "2"
+    },
+    {
+      "id": "6dea",
+      "name": "tomate",
+      "price": "6"
+    },
+    {
+      "id": "f0d4",
+      "name": "vinagre",
+      "price": "3"
+    }
+  ]
 }
