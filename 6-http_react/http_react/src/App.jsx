@@ -1,99 +1,92 @@
+import { useState, useEffect } from "react";
+import "./App.css";
+import { useFetch } from "./hooks/useFetch";
 
-import { useState,useEffect } from 'react'
-import './App.css'
-
-const url="http://localhost:3000/products";
+const url = "http://localhost:3000/products";
 
 function App() {
+  // Estado para os produtos
+  const [products, setProducts] = useState([]);
 
-  //1) Resgatando dados
-  const [products, setProduct]=useState([]);
+  // Estado para o formulário
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
 
-  // 2) enviar dados
-  const [name,setName]=useState("");
-  const [price, setPrice]=useState("");
+  // Custom hook para buscar os dados
+  const { data: items } = useFetch(url);
 
-  const handleSubmit =  async (e)=>{
-    e.preventDefault()
+  // Atualiza os produtos quando os dados são carregados
+  useEffect(() => {
+    if (items) {
+      setProducts(items);
+    }
+  }, [items]);
 
-    const product={
-      name,price
-    };
+  // Função para adicionar um novo produto
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-   
-    const res= await fetch(url,{
-      method:"POST",
-      headers:{
-        "Content-type":"application/json"
+    const product = { name, price };
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify(product),
+    });
 
-    }
-    );
+    const addProduct = await res.json();
 
-    // 3) Carregamento dinâmico 
-    const addProduct= await res.json();
+    // Atualiza a lista de produtos localmente
+    setProducts((prevProducts) => [...prevProducts, addProduct]);
 
-// Ele vai acessar o modificador de estado, pegar o antigo estado e add o novo valor 
-    setProduct((prevProduct)=>[...prevProduct,addProduct])
+    // Limpa os campos do formulário
+    setName("");
+    setPrice("");
+  };
 
-
-  }
-
-  useEffect(()=>{
-    console.log("Carregando");
-
-
-    async function getData(){
-      // await- espere
-      // fetch - buscar
-      const res= await fetch(url);
-
-      const data= await res.json();
-
-      setProduct(data)
-
-    }
-
-    getData();
-  },[])
-
-  useState
   return (
     <>
-     <h1>HTTP react</h1>
+      <h1>HTTP React</h1>
 
-     {/* 1) Resgatando dados */}
-     <ul>
-      {products.map((product)=>(
-        <li key={product.id}>{product.name} R${product.price}</li>
-      ))
-      }
-     </ul>
+      {/* Lista de produtos */}
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            {product.name} R${product.price}
+          </li>
+        ))}
+      </ul>
 
-      {/* 2) enviar dados */}
+      {/* Formulário para adicionar um produto */}
       <div className="add-product">
         <form onSubmit={handleSubmit}>
+          <label>
+            <span>Nome</span>
+            <input
+              type="text"
+              value={name}
+              placeholder="Nome"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
 
-        <label>
-          <span>Nome</span>
-          <input type="text" value={name}  placeholder='Nome' onChange={(name)=>{setName(name.target.value)}} />
-        </label>
+          <label>
+            <span>Preço</span>
+            <input
+              type="text"
+              value={price}
+              placeholder="Preço"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </label>
 
-        <label>
-          <span>Preço</span>
-          <input type="text" value={price}  placeholder='Preço' onChange={(price)=>{setPrice(price.target.value)}} />
-        </label>
-
-        <input type="submit" value="Cadastrar" />
-
+          <input type="submit" value="Cadastrar" />
         </form>
-
       </div>
-
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;
