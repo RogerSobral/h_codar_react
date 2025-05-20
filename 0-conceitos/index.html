@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <!-- Esse código HTML usa React (versão 18) de forma clássica, sem JSX e sem bundler como Webpack ou ferramentas modernas. -->
+    <div id="app"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <script>
+        const  minhaDiv= document.querySelector("#app");
+
+        // ReactDOM.render(...) é o método antigo (antes do React 18) para renderizar elementos React no DOM.
+        ReactDOM.render(React.createElement("h1",{id:"title"},
+        React.createElement("label",{id:"conteudo"},"introdução")
+        ),minhaDiv)
+        // React.createElement("h1", null, ...) cria um elemento <h1>.
+
+
+        // entenddo jsx
+        // ReactDOM.render(
+        //     <h1 id="title">
+        //         <label id="conteudo">
+        //             conteudo 2
+        //         </label>
+        //     </h1>,
+        //     minhaDiv
+
+        // )    
+
+    </script>
+</body>
+</html>
